@@ -1,0 +1,50 @@
+html,body{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+div{
+  box-sizing: border-box;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
+.flex-one{
+  display: flex;
+  flex-wrap: wrap;
+}
+.flex-two{
+  display: flex;
+  flex-wrap: w rap;
+  align-items: center;
+}
+.flex-three{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;  
+}
+.flex-four{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-listone{
+  height: 26px;
+  background: #e3e3e5;
+  color: #666;
+  font-weight: normal;
+  padding: 4px 10px;
+  
+}
+.center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:  translate(-50%,-50%);
+}
+.text-one{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
