@@ -4,7 +4,7 @@
  * @Autor: Seven
  * @Date: 2021-01-15 15:28:52
  * @LastEditors: Seven
- * @LastEditTime: 2021-01-30 15:27:07
+ * @LastEditTime: 2021-02-17 15:24:14
  */
 //时间格式月加日
 export function formatDateTime(inputTime) {
@@ -50,6 +50,22 @@ export function formatDateTimeY(inputTime) {
   minute = minute < 10 ? ('0' + minute) : minute;
   second = second < 10 ? ('0' + second) : second;
   return  y+'年'+m + '月' + d + "日" ;
+}
+//年月日时分秒
+export function formatDateTimeM(inputTime) {
+  var date = new Date(inputTime);
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  m = m < 10 ? ('0' + m) : m;
+  var d = date.getDate();
+  d = d < 10 ? ('0' + d) : d;
+  var h = date.getHours();
+  h = h < 10 ? ('0' + h) : h;
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+  minute = minute < 10 ? ('0' + minute) : minute;
+  second = second < 10 ? ('0' + second) : second;
+  return  y+'年'+m + '月' + d + "日"+minute+'分'+second+'秒' ;
 }
 export function currentTime(curr){
   curr+=''

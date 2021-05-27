@@ -4,7 +4,7 @@
  * @Autor: Seven
  * @Date: 2021-01-09 12:50:51
  * @LastEditors: Seven
- * @LastEditTime: 2021-01-11 09:01:07
+ * @LastEditTime: 2021-02-17 22:20:51
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -62,6 +62,16 @@ const routes = [
         component:()=>import('../views/Recomment/NewMusic.vue')
       },
     ]
+  },
+  {
+    path:"/list",
+    name:"list",
+    component:()=>import('@/views/MusicList.vue')
+  },
+  {
+    path:"/musicDetail",
+    name:"MusicDetail",
+    component:()=>import('@/views/MusicDetail.vue')
   },
 ]
 

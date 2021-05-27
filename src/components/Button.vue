@@ -4,26 +4,34 @@
  * @Autor: Seven
  * @Date: 2021-01-09 15:02:35
  * @LastEditors: Seven
- * @LastEditTime: 2021-01-30 18:16:26
+ * @LastEditTime: 2021-03-29 00:15:40
 -->
 @<template>
   <div class='button flex-four'>
     <!-- 时间条 -->
     <div class="silder">
-      <el-slider v-model="playTime" :max="playMusicTime"></el-slider>
+      <el-slider v-model="playTime" :max="playMusicTime" @change='silderTime'></el-slider>
     </div>
     <!-- left -->
     <div class="buttom-left flex">
       <!-- 获取vuex数据 -->
       <img src="@/assets/2.png" alt="" v-if="playUrl==1">
-      <img :src="musicDetail.al.picUrl" alt="" v-else>
-      <div class="left-center"  v-if="playUrl==1">
-        <div>歌手-歌名</div>
-        <div>00:00/00:00</div>
+      <div class="hoverMusic" v-else @click='godetailed'>
+        <img :src="musicDetail.al.picUrl" alt="">
+        <div class='goMusicDetail'>
+          <div>
+            <i class='el-icon-arrow-up'></i>
+          </div>
+          <i class='el-icon-arrow-up'></i>    
+        </div>
+      </div>
+      <div class="left-center"  v-if="playUrl==1" >
+        <div class='text-one'>歌手-歌名</div>
+        <div class='text-one'>00:00/00:00</div>
       </div>
       <div class="left-center"  v-else>
-        <div>{{musicDetail.ar[0].name}}-{{musicDetail.al.name}}</div>
-        <div>{{playTime | fromTimeOne}}/{{musicDetail.m.br|fromTime}}</div>
+        <div class='text-one'>{{musicDetail.ar[0].name}}-{{musicDetail.al.name}}</div>
+        <div class='text-one'>{{playTime | fromTimeOne}}/{{musicDetail.dt|fromTime}}</div>
       </div>
       
     </div>
@@ -95,6 +103,7 @@ export default {
     Rounding(time){
       let curr=currentTime(time)
       return curr
+      
     },
     fromTimeOne:function(val){
       let time =fromDataTimeOne(val)
@@ -109,18 +118,22 @@ export default {
       //暂停
       audio.pause()
       this.showPlay=false
+      this.$store.commit('getPlay',true)
     },
     //开始
     play(){
       let audio=this.$refs.audio
       audio.play()
       this.showPlay=true
+      this.$store.commit('getPlay',false)
     },
+    
     //时间条
     selider(){
       let audio=this.$refs.audio
       audio.addEventListener('timeupdate',()=>{
         this.playTime=audio.currentTime
+        this.$store.commit('getTime',this.playTime)
         this.playMusicTime=audio.duration
       })
     },
@@ -130,6 +143,15 @@ export default {
       let audio=this.$refs.audio
       audio.volume=this.volume/100
     },
+    silderTime(){
+      let audio=this.$refs.audio
+      console.log(this.playTime/100)
+      audio.currentTime=this.playMusicTime-(this.playMusicTime-this.playTime)
+      // this.playTime=this.playMusicTime-(this.playMusicTime-audio.currentTime)
+    },
+    godetailed(){
+      this.$router.push('/musicDetail')
+    },
   }
 }
 </script>
@@ -138,7 +160,7 @@ export default {
   .button
     position relative
     height: 60px;
-    background: skyblue;
+    background: #eeaeee ;
     .silder
       position absolute
       height 10px
@@ -149,8 +171,24 @@ export default {
         width 50px
         height 50px
         margin 0 15px
+      .hoverMusic
+        position: relative;
+        .goMusicDetail
+          position absolute
+          top: 0;
+          left: 15px;
+          height: 50px;
+          width: 50px;
+          color #fff
+          text-align center
+          background rgba(1,1,1,.3)
+          opacity: 0;
+      &:hover .goMusicDetail
+        opacity: 1;  
+
       .left-center
         padding-top 4px
+        width: 140px;
     .button-center
       .center-left
         color: blue;

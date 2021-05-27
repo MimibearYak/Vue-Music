@@ -4,7 +4,7 @@
  * @Autor: Seven
  * @Date: 2021-01-10 13:29:21
  * @LastEditors: Seven
- * @LastEditTime: 2021-01-22 13:54:12
+ * @LastEditTime: 2021-02-15 20:35:22
 -->
 @<template>
   <div class='gexin-box'>
@@ -23,7 +23,7 @@
         <div>更多></div>
       </div>
       <div class="listMusic flex-one">
-        <div class='item' v-for='(item,index) in playlists' :key='index'>
+        <div class='item' v-for='(item,index) in playlists' :key='index' @click='goList(item.id)'>
           <div class='item-top'>
             <div class="play-num"><i class="el-icon-service"></i>{{item.commentCount}}</div>
             <div class='top-name'>{{item.description}}</div>
@@ -100,6 +100,11 @@ export default {
       this.getnewMusicM()
     },
     methods:{
+      //跳转到歌单
+      goList(id){
+        console.log(200)
+        this.$router.push({path:'/list',query:{id:id}})
+      },
       //获取播放的数据
       playMusics(id){
         this.getUrlM(id)
@@ -220,14 +225,14 @@ export default {
               -webkit-box-orient: vertical;
             .playMusic
               position absolute
-              right 10px
-              bottom 18px
+              right -6px
+              bottom 2px
               height 50px
               width 50px
               transform translateX(115%)
               transition .4s
               border-radius 50%
-              font-size 50px
+              font-size 38px
               color red
         .item:hover .top-name
           transform translate(0)

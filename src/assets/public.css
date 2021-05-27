@@ -14,9 +14,13 @@ div{
   display: flex;
   flex-wrap: wrap;
 }
+.flex-1{
+  display: flex;
+  flex-wrap: nowrap;
+}
 .flex-two{
   display: flex;
-  flex-wrap: w rap;
+  flex-wrap: wrap;
   align-items: center;
 }
 .flex-three{
@@ -28,6 +32,11 @@ div{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.flex-0{
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
 }
 .card-listone{
   height: 26px;
@@ -47,4 +56,16 @@ div{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+ul,li{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #fac3cc;
+  border-radius: 3px;
+}
+::-webkit-scrollbar{
+  width: 8px;
 }
